@@ -12,12 +12,7 @@ const index = () => {
           <h1>Bayan ul Quran</h1>
         </Col>
         <Col lg md sm={2}>
-          <img
-            className="logo"
-            style={{ float: "right" }}
-            src="bookmark.png"
-            alt="bookmark logo"
-          />
+          <img className="logo" style={{ float: "right" }} />
         </Col>
       </Row>
       <Row>
