@@ -25,16 +25,16 @@ import winning from "../public/music/Winning - NEFFEX.mp3";
 
 // #region -------- Styled Components -----------------------------------------
 const Div = styled("div")(({ theme }) => ({
-  backgroundColor: "black",
-  height: "100vh",
-  width: "100vw",
+  backgroundColor: "fdf3e9",
+  height: "100px",
+  width: "auto",
   paddingTop: theme.spacing(6),
 }));
 
 const CustomPaper = styled(Paper)(({ theme }) => ({
   backgroundColor: "#4c4c4c",
-  marginLeft: theme.spacing(6),
-  marginRight: theme.spacing(6),
+  marginLeft: theme.spacing(2),
+  marginRight: theme.spacing(2),
   padding: theme.spacing(2),
 }));
 

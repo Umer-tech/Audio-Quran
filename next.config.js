@@ -1,42 +1,24 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   webpack: (webpackConfig) => {
-//     // add a new rule to handle mp3 and wav files with file-loader
-//     webpackConfig.module.rules.push({
-//       test: /\.(mp3|wav)$/,
-//       use: [
-//         {
-//           loader: "file-loader",
-//           options: {
-//             name: "[path][name].[ext]",
-//           },
-//         },
-//       ],
-//     });
-
-//     return webpackConfig;
-//   },
-//   reactStrictMode: true,
-// };
-
-// module.exports = nextConfig;
-// next.config.js
-
 module.exports = {
-  webpack: (webpackConfig) => {
-    // add a new rule to handle mp3 and wav files with file-loader
-    webpackConfig.module.rules.push({
-      test: /\.(mp3|wav)$/,
+  webpack(config, options) {
+    const { isServer } = options;
+    config.module.rules.push({
+      test: /\.(ogg|mp3|wav|mpe?g)$/i,
+      exclude: config.exclude,
       use: [
         {
-          loader: "file-loader",
+          loader: require.resolve("url-loader"),
           options: {
-            name: "[path][name].[ext]",
+            limit: config.inlineImageLimit,
+            fallback: require.resolve("file-loader"),
+            publicPath: `${config.assetPrefix}/_next/static/images/`,
+            outputPath: `${isServer ? "../" : ""}static/images/`,
+            name: "[name]-[hash].[ext]",
+            esModule: config.esModule || false,
           },
         },
       ],
     });
 
-    return webpackConfig;
+    return config;
   },
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   Container,
   Row,
@@ -18,7 +19,7 @@ const index = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="ba sic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="/bayan">Home</Nav.Link>
+                <Nav.Link href="#home">Home</Nav.Link>
                 <Nav.Link href="#link">Settings</Nav.Link>
                 <Nav.Link href="#bookmarks">Bookmarks</Nav.Link>
               </Nav>
@@ -30,14 +31,20 @@ const index = () => {
           <Col lg={4} md={8} sm={12}>
             <Stack className="stack" gap={5}>
               <div className="menu">
-                <span>Tilawat </span> <img src="quran.png" alt="logo" />
+                <Link href="/tilawat">
+                  <span>Tilawat </span> <img src="quran.png" alt="logo" />
+                </Link>
               </div>
               <div className="menu">
-                <span>Bayan </span> <img src="quran.png" alt="logo" />
+                <Link href="/bayan">
+                  <span>Bayan </span> <img src="quran.png" alt="logo" />
+                </Link>
               </div>
-              <div className="menu">
-                <span>Tafheef</span> <img src="quran.png" alt="logo" />
-              </div>
+              <Link href="/tafheem">
+                <div className="menu">
+                  <span>Tafheem</span> <img src="quran.png" alt="logo" />
+                </div>
+              </Link>
             </Stack>
           </Col>
           <Col></Col>
