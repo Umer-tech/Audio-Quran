@@ -5,13 +5,13 @@ const HomeScreen = (props) => {
   return (
     <Container className="container" fluid="md">
       <Row className="bayan_screen">
-        <Col lg md={2} sm={3}>
+        <Col lg md sm xs xxs={2}>
           <img className="logo" src="settings.png" alt="settings logo" />
         </Col>
-        <Col lg md={8} sm={6}>
+        <Col lg md sm xs xxs={8}>
           <h3>{props.title}</h3>
         </Col>
-        <Col lg md={2} sm={3}>
+        <Col lg md sm xs xxs={2}>
           <img className="logo" src="bookmark.png" style={{ float: "right" }} />
         </Col>
       </Row>
@@ -20,6 +20,7 @@ const HomeScreen = (props) => {
           {props.surahslist.map((surah) => (
             <ListGroup.Item key={surah}>
               {surah.EnglishName}
+              <span></span>
             </ListGroup.Item>
           ))}
         </ListGroup>
