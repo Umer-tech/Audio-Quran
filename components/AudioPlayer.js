@@ -25,8 +25,8 @@ import winning from "../public/music/Winning - NEFFEX.mp3";
 
 // #region -------- Styled Components -----------------------------------------
 const Div = styled("div")(({ theme }) => ({
-  backgroundColor: "fdf3e9",
-  height: "100px",
+  backgroundColor: "blue",
+  height: "auto",
   width: "auto",
   paddingTop: theme.spacing(6),
 }));

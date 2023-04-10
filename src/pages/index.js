@@ -40,7 +40,7 @@ const index = () => {
                   <span>Bayan </span> <img src="quran.png" alt="logo" />
                 </Link>
               </div>
-              <Link href="/tafheem">
+              <Link href="/tafheem/">
                 <div className="menu">
                   <span>Tafheem</span> <img src="quran.png" alt="logo" />
                 </div>
