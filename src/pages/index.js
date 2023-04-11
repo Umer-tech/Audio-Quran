@@ -31,20 +31,21 @@ const index = () => {
           <Col lg={4} md={8} sm={12}>
             <Stack className="stack" gap={5}>
               <div className="menu">
-                <Link href="/tilawat">
-                  <span>Tilawat </span> <img src="quran.png" alt="logo" />
+                <Link href="/tilawat" style={{ textDecoration: 'none' , color: "black"}}>
+                  <span>Tilawat </span> <img src="Images/quran.png" alt="logo" />
                 </Link>
               </div>
               <div className="menu">
-                <Link href="/bayan">
-                  <span>Bayan </span> <img src="quran.png" alt="logo" />
+                <Link href="/bayan" style={{ textDecoration: 'none' ,color: "black"}}>
+                  <span>Bayan </span> <img src="Images/quran.png" alt="logo" />
                 </Link>
               </div>
-              <Link href="/tafheem/">
                 <div className="menu">
-                  <span>Tafheem</span> <img src="quran.png" alt="logo" />
+              <Link href="/tafheem/" style={{ textDecoration: 'none', color: "black" }}>
+                  <span>Tafheem</span> <img src="Images/quran.png" alt="logo" />
+                  </Link>
+
                 </div>
-              </Link>
             </Stack>
           </Col>
           <Col></Col>

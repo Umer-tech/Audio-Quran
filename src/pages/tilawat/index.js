@@ -28,7 +28,7 @@ const Index = (props) => {
       <Tilawat title="Tilawat e Quran" surahslist={props.data} />
     </div>
     )
-  };
+  }
 </>
   );
 }

@@ -6,6 +6,7 @@ const AyatAudios = sequelize.define(
     AyatId: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+
     },
     SurahRef: {
       type: DataTypes.INTEGER,

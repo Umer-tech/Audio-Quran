@@ -1,5 +1,6 @@
-import React from "react";import {useState, useEffect} from 'react';
-import AudioPlayer from "./AudioPlayer";
+import React from "react";
+import {useState, useEffect} from 'react';
+import Player from "./Player";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -19,6 +20,7 @@ const Tilawat = (props) => {
   }
   const handleShow = () => setShow(true);
 
+
   function changeRecitor(e) {
     e.preventDefault();
     setRecitor(e.target.value);
@@ -34,25 +36,28 @@ const Tilawat = (props) => {
       <>
       <Row className="bayan_screen">
         <Col lg md sm xs xxs={2}>
-          <img className="logo" src="settings.png" alt="settings logo" onClick={handleShow}/>
+          <img className="logo" src="Images/settings.png" alt="settings logo" onClick={handleShow}/>
         </Col>
         <Col lg md sm xs xxs={8}>
-          <h3>{props.title}</h3>
+          <h1>{props.title}</h1>
         </Col>
         <Col lg md sm xs xxs={2}>
-          <img className="logo" src="bookmark.png" style={{ float: "right" }} />
         </Col>
       </Row>
       <Row>
         <ListGroup className="list-group">
-          {props.surahslist.map((surah) => (
+          {props.surahslist.map((surah, index) => (
             <Button variant="outline-secondary" onClick={() => {getSurahAudio(surah.Id)}} key={surah.Id}>
             <ListGroup.Item >
+            
             <Row>
-            <Col>
+            <Col lg md sm xs xxs={2}>
+              <span>{index + 1}</span>
+            </Col>
+            <Col lg md sm xs xxs={5}>
               <span>{surah.EnglishName}</span>
             </Col>
-            <Col>
+            <Col lg md sm xs xxs={5}>
               <span>{surah.ArabicName}</span>
             </Col>
             </Row>
@@ -64,8 +69,8 @@ const Tilawat = (props) => {
         </ListGroup>
         
       </Row>
-      <Row className="bayan_screen">
-        <AudioPlayer />
+      <Row>
+        <Player audioList = {ayataudiolist} />
       </Row>
       </>
       <Modal show={show} onHide={handleClose}>
@@ -111,7 +116,6 @@ const Tilawat = (props) => {
         </Modal.Footer>
         
       </Modal>
-      
     </Container>
     
   );

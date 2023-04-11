@@ -1,23 +1,25 @@
 .container {
-  background-color: #ffffff;
+  background-color:#fff3e6;
+  height: auto;
 }
 .navbar,
 .menu,
 .bayan_screen {
-  background-color: #fdf3e9;
+  background-color:#fff3e6;
+}
+.stack{
+  margin-top: 150px;
+  margin-bottom: 150px;
 }
 .menu {
   padding: 10px;
   border-radius: 25px;
   border: 2px solid grey;
   font-size: 25px;
-}
-.stack {
-  margin-top: 100px;
   text-align: center;
 }
 .list-group {
-  max-height: 500px;
+  max-height: 550px;
   margin-bottom: 10px;
   overflow: scroll;
 }
