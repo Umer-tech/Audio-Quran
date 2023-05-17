@@ -1,5 +1,5 @@
 import React from "react";
-import HomeScreen from "../../../components/Bayan_and_Tafheem";
+import Bayan_and_Tafheem from "../../../components/Bayan_and_Tafheem";
 import { useState, useEffect } from "react";
 export async function getServerSideProps() {
   const response = await fetch("http://localhost:3000/api/surahs", {
@@ -25,7 +25,7 @@ const Index = (props) => {
       <span>Loading....................</span>
     ) :(
     <div>
-      <HomeScreen title="Bayan ul Quran" surahslist={props.data} />
+    <Bayan_and_Tafheem title="Byan-ul-Quran" surahslist={props.data} />
     </div>
     )
   };

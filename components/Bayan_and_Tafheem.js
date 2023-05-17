@@ -1,7 +1,6 @@
 import React from "react";
 import { useRouter } from 'next/router'
 import {useState, useEffect} from 'react';
-import AudioPlayer from "./AudioPlayer";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -32,13 +31,12 @@ const Bayan_and_Tafheem = (props) => {
       <>
       <Row className="bayan_screen">
         <Col lg md sm xs xxs={2}>
-          <img className="logo" src="settings.png" alt="settings logo" onClick={handleShow}/>
         </Col>
         <Col lg md sm xs xxs={8}>
           <h3>{props.title}</h3>
         </Col>
         <Col lg md sm xs xxs={2}>
-          <img className="logo" src="bookmark.png" style={{ float: "right" }} />
+          <img className="logo" src="Images/bookmark.png" style={{ float: "right" }} />
         </Col>
       </Row>
       <Row>
@@ -47,7 +45,7 @@ const Bayan_and_Tafheem = (props) => {
             <Button variant="outline-secondary" onClick={() => {
         router.push({
           pathname: `/${pathname}/[id]`,
-          query: { id: surah.Id + '-' + reciter,
+          query: { id: surah.Id,
                   },
         })
       }}
@@ -70,7 +68,6 @@ const Bayan_and_Tafheem = (props) => {
         
       </Row>
       <Row className="bayan_screen">
-        <AudioPlayer />
       </Row>
       </>
       <Modal show={show} onHide={handleClose}>

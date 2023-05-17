@@ -4,28 +4,12 @@ import {
   Container,
   Row,
   Col,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Stack,
+  Stack
 } from "react-bootstrap";
 const index = () => {
   return (
     <>
       <Container className="container" fluid="md">
-        <Row>
-          <Navbar className="navbar" expand="lg">
-            <Navbar.Brand href="#home"> Audio Quran</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="ba sic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Settings</Nav.Link>
-                <Nav.Link href="#bookmarks">Bookmarks</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </Row>
         <Row>
           <Col></Col>
           <Col lg={4} md={8} sm={12}>

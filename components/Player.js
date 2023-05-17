@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 
-const Player = ({audioList}) => {
+const Player = ({audioList, Display}) => {
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -18,7 +18,6 @@ const Player = ({audioList}) => {
   const [flag2, setflag2] = useState(false);
   const [bookmark, setBookmark] = useState({Title: "", SurahRef: 0, AyatRef: 0, RepeatCount: 0, EndAyatRef: 0, Rtype: 0, ReciterId: 0});
   const audioRef = useRef(null);
-
   const audioSrcList = [];
   audioList.map((audio, index) => (
     audioSrcList[index] =  "assets/" + audio.ReciterRef + "/" + audio.AudioFile
@@ -187,11 +186,15 @@ const onAudioCanPlay = () => {
         </Row>
         <Row>
         <Col md sm xs = {6} >
+        {Display ? (
         <img className = {styles.img} src = {Img} alt = "Repeat" onClick={changeImg}/>
+            ) : ("")}
         </Col>
 
         <Col md sm xs = {6} >
+        {Display ? (
           <img className = {styles.img2} src = "Images/bookmark.png" alt = "Bookmark" onClick={handleBookmarkShow}/>
+          ): ("")}
         </Col>
         </Row>
       <audio

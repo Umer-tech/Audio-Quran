@@ -39,7 +39,7 @@ const Tilawat = (props) => {
           <img className="logo" src="Images/settings.png" alt="settings logo" onClick={handleShow}/>
         </Col>
         <Col lg md sm xs xxs={8}>
-          <h1>{props.title}</h1>
+          <h1 className="heading">{props.title}</h1>
         </Col>
         <Col lg md sm xs xxs={2}>
         </Col>
@@ -70,7 +70,7 @@ const Tilawat = (props) => {
         
       </Row>
       <Row>
-        <Player audioList = {ayataudiolist} />
+        <Player audioList = {ayataudiolist} Display= {true}/>
       </Row>
       </>
       <Modal show={show} onHide={handleClose}>

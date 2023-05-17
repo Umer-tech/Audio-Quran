@@ -3,7 +3,17 @@ import sequelize from "/database/conn.js";
 export default async function handler(req, res) {
   sequelize.sync().then(() => console.log("DB is ready"));
   
-  if(req.method  == "POST")
+  if(req.method == "GET")
+  {
+    try {
+      const bookmarks = await Bookmark.findAll();
+      res.status(200).json(bookmarks);
+    } catch {
+      res.status(404).json({ error: "Not Found" });
+    }
+  }
+
+  else if(req.method  == "POST")
   {
     try {
         const formData = req.body;

@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize"; // const sqlite = require('sqlite');
+import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize("test-db", "user", "pass", {
   dialect: "sqlite",
