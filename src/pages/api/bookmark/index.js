@@ -18,6 +18,8 @@ export default async function handler(req, res) {
     try {
         const formData = req.body;
         const {Title, SurahRef, AyatRef, RepeatCount, EndAyatRef, RType, ReciterId} = formData;
+        
+
         if(!formData) return res.status(404).json( { error: "Form Data Not Provided...!"});
         const bookmark = await Bookmark.create({ Title : Title, SurahRef: SurahRef, AyatRef : AyatRef,
              RepeatCount : RepeatCount, EndAyatRef: EndAyatRef, RType: RType, ReciterId: ReciterId });

@@ -1,11 +1,15 @@
 import React from "react";
 import Link from "next/link";
+import UserAudioRecorder from "../../components/UserAudioRecorder";
+import PredictPage from "../../components/PredictPage";
+import VoiceRecorder from "../../components/VoiceRecorder";
 import {
   Container,
   Row,
   Col,
   Stack
 } from "react-bootstrap";
+import { VoiceOverOff } from "@mui/icons-material";
 const index = () => {
   return (
     <>
@@ -33,6 +37,11 @@ const index = () => {
             </Stack>
           </Col>
           <Col></Col>
+        </Row>
+        <Row>
+          {/* <UserAudioRecorder/> */}
+          <PredictPage/>
+          {/* <VoiceRecorder/> */}
         </Row>
       </Container>
     </>

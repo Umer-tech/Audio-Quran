@@ -36,7 +36,6 @@ const Bayan_and_Tafheem = (props) => {
           <h3>{props.title}</h3>
         </Col>
         <Col lg md sm xs xxs={2}>
-          <img className="logo" src="Images/bookmark.png" style={{ float: "right" }} />
         </Col>
       </Row>
       <Row>

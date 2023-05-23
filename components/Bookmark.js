@@ -5,7 +5,10 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Container, ListGroup, Row, Col } from "react-bootstrap";
+import Router, { useRouter } from 'next/router';
+
 const Bookmark = (props) => {
+  const router = useRouter();
   const [ayataudiolist, setAyataudiolist] = useState([]);
   const [showbookmark, setShowBookmark] = useState(false);
   const [bookmark, setBookmark] = useState({BookmarkId: 0, Title: "", SurahRef: 0, AyatRef: 0, RepeatCount: 0, EndAyatRef: 0, Rtype: 0, ReciterId: 0});
@@ -13,8 +16,21 @@ const Bookmark = (props) => {
   const  getBookmarkAudio =async (bookmark) => {
     let dataa = [];
     let data2 = [];
+    if(bookmark.Rtype === 1)
+    {
     const id = bookmark.SurahRef + "-" + bookmark.ReciterId;
     await fetch(`/api/surah_audio/${id}`).then((res) => res.json()).then((data)=> dataa = data);
+    }
+    else if(bookmark.Rtype === 3){
+      const id = bookmark.SurahRef;
+    await fetch(`/api/tafheem/${id}`).then((res) => res.json()).then((data)=> dataa = data);
+    }
+    //Uncomment after witing API for Bayan ul Quran
+    
+    // else if(bookmark.Rtype === 3){
+    //   const id = bookmark.SurahRef + "-" + bookmark.ReciterId;
+    // await fetch(`/api/surah_audio/${id}`).then((res) => res.json()).then((data)=> dataa = data);
+    // }
     data2 = dataa.filter((data) => {
       if (data.AyatId >= bookmark.AyatRef && data.AyatId <= bookmark.EndAyatRef)
           return data;
@@ -39,7 +55,12 @@ const Bookmark = (props) => {
       
       const response = await fetch(`/api/bookmark/${id}`, Options)
       if(response.status == 200)
-        alert("Bookmark Updated")
+        {alert("Bookmark Updated!!")
+        router.reload();}
+      else{
+        alert("Something went Wrong")
+      }
+
       ;
   }catch(error){
       return error;
@@ -49,6 +70,7 @@ const Bookmark = (props) => {
     const id = bookmark.BookmarkId;
     await fetch(`/api/bookmark/${id}`).then((res) => res.json()).then((data)=> setBookmark(...data));
     setShowBookmark(true);
+
   }
 
   function handelChange(e)  {
@@ -66,7 +88,12 @@ const Bookmark = (props) => {
       
       const response = await fetch(`/api/bookmark/${id}`, Options)
       if(response.status == 200)
-        alert("Deleted!!!")
+        {alert("Deleted!!!")
+        router.reload();}
+      else{
+        alert("Something went Wrong")
+      }
+
       ;
   }catch(error){
       return error;

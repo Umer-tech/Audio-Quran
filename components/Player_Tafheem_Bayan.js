@@ -6,7 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 
 
-const Player = ({audioList, Display}) => {
+const Player_Tafheem_Bayan = ({audioList, tafheem}) => {
   const [currentAudioIndex, setCurrentAudioIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -16,11 +16,11 @@ const Player = ({audioList, Display}) => {
   const [flag, setflag] = useState(false);
   const [showbookmark, setShowBookmark] = useState(false);
   const [flag2, setflag2] = useState(false);
-  const [bookmark, setBookmark] = useState({Title: "", SurahRef: 0, AyatRef: 0, RepeatCount: 0, EndAyatRef: 0, Rtype: 1, ReciterId: 0});
+  const [bookmark, setBookmark] = useState({Title: "", SurahRef: 0, AyatRef: 0, RepeatCount: 0, EndAyatRef: 0, Rtype: 2, ReciterId: 0});
   const audioRef = useRef(null);
   const audioSrcList = [];
   audioList.map((audio, index) => (
-    audioSrcList[index] =  "assets/" + audio.ReciterRef + "/" + audio.AudioFile
+    audioSrcList[index] =  "/assets/" + audio.ReciterRef + "/" + audio.AudioFile
   )) 
 
   const playAudio = () => {
@@ -92,18 +92,6 @@ const onAudioCanPlay = () => {
     }
     return "00:00";
   }
-  const changeImg = () => {
-    if(flag == false)
-     {
-       setImg("Images/SurahRepeat.png");
-       setflag(true);
-     }
-     if(flag == true)
-     {
-       setImg("Images/AyahRepeat.png");
-       setflag(false);
-     }
-  }
   const handleBookmarkClose = () => 
   {
     setShowBookmark(false);
@@ -128,24 +116,37 @@ const onAudioCanPlay = () => {
   }
   }
   const handleBookmarkShow = () => {
-    console.log(bookmark);
     if(flag2) {
-      setBookmark(prevstate => ({
-        ...prevstate,
-        Title: "Bookmark_" + audioList[currentAudioIndex].SurahRef + "_" + audioList[currentAudioIndex].ReciterRef,
-        AyatRef : audioList[currentAudioIndex].AyatId,
-        EndAyatRef: audioList[currentAudioIndex].AyatId,
-        SurahRef: audioList[currentAudioIndex].SurahRef,
-        ReciterId: audioList[currentAudioIndex].ReciterRef,
-            })
-      )
+      if(tafheem){
+        setBookmark(prevstate => ({
+          ...prevstate,
+          Title: "Bookmark_" + audioList[currentAudioIndex].SurahRef + "_" + audioList[currentAudioIndex].ReciterRef,
+          AyatRef : audioList[currentAudioIndex].AyatFrom,
+          EndAyatRef: audioList[currentAudioIndex].AyatTo,
+          SurahRef: audioList[currentAudioIndex].SurahRef,
+          ReciterId: audioList[currentAudioIndex].ReciterRef,
+          Rtype: 3
+        })
+        )
+      }
+      else {
+        setBookmark(prevstate => ({
+          ...prevstate,
+          Title: "Bookmark_" + audioList[currentAudioIndex].SurahRef + "_" + audioList[currentAudioIndex].ReciterRef,
+          AyatRef : audioList[currentAudioIndex].AyatFrom,
+          EndAyatRef: audioList[currentAudioIndex].AyatTo,
+          SurahRef: audioList[currentAudioIndex].SurahRef,
+          ReciterId: audioList[currentAudioIndex].ReciterRef,
+        })
+        )
+      }
       }
     setShowBookmark(true);
   }
 
   function handelChange(e)  {
       e.preventDefault();
-    setBookmark({...bookmark, [e.target.name]: e.target.value, ReciterId: audioList[currentAudioIndex].ReciterRef,SurahRef: audioList[currentAudioIndex].SurahRef, Rtype: 1})
+    setBookmark({...bookmark, [e.target.name]: e.target.value, ReciterId: audioList[currentAudioIndex].ReciterRef,SurahRef: audioList[currentAudioIndex].SurahRef})
   }
 
   return (
@@ -173,29 +174,25 @@ const onAudioCanPlay = () => {
       <Row className= {styles.player_controls}>
       <Col  md sm xs= {3}></Col>
         <Col  md sm xs= {6}className="d-flex align-items-center justify-content-center">
-        <img src = "Images/backward.png"  className = {styles.player_controlss} alt = "Backward"  onClick={handlePrevious} />
+        <img src = "/Images/backward.png"  className = {styles.player_controlss} alt = "Backward"  onClick={handlePrevious} />
             
             {isPlaying ? (
-              <img src = "Images/pause-button-hi.png"  className = {styles.player_controlss} alt = "Pause"  onClick={pauseAudio} />
+              <img src = "/Images/pause-button-hi.png"  className = {styles.player_controlss} alt = "Pause"  onClick={pauseAudio} />
     
             ) : (
-              <img src = "Images/playbutton.png"  className = {styles.player_controlss} alt = "Play"  onClick={playAudio} /> 
+              <img src = "/Images/playbutton.png"  className = {styles.player_controlss} alt = "Play"  onClick={playAudio} /> 
             )}
-            <img src = "Images/farward.png"  className = {styles.player_controlss} alt = "Next"  onClick={handleNext} />
+            <img src = "/Images/farward.png"  className = {styles.player_controlss} alt = "Next"  onClick={handleNext} />
         </Col>
         <Col  md sm xs= {3}></Col>
         </Row>
         <Row>
         <Col md sm xs = {6} >
-        {Display ? (
-        <img className = {styles.img} src = {Img} alt = "Repeat" onClick={changeImg}/>
-            ) : ("")}
         </Col>
 
         <Col md sm xs = {6} >
-        {Display ? (
-          <img className = {styles.img2} src = "Images/bookmark.png" alt = "Bookmark" onClick={handleBookmarkShow}/>
-          ): ("")}
+    
+          <img className = {styles.img2} src = "/Images/bookmark.png" alt = "Bookmark" onClick={handleBookmarkShow}/>
         </Col>
         </Row>
       <audio
@@ -242,4 +239,4 @@ const onAudioCanPlay = () => {
   );
 };
 
-export default Player;
+export default Player_Tafheem_Bayan;
