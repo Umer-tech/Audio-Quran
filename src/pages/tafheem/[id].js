@@ -4,10 +4,56 @@ import Button from 'react-bootstrap/Button';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Player_Tafheem_Bayan from '../../../components/Player_Tafheem_Bayan';
+import PredictPage from '../../../components/PredictPage';
+
 
 const SurahDeyails = () => {
   const router = useRouter();
   const [data, setData] = useState(null);
+  const [prediction, setPrediction] = useState('');
+  const [audioData, setAudioData] = useState([])
+  const numbers = ["1","2","3","4","5","6","7","8","9"]
+  useEffect(() => {
+    let index = -1
+    if(prediction != '')
+    {
+      index = numbers.indexOf(prediction)
+      if(index >= 0)
+      {
+      index += 1
+      document.getElementById(index).click()
+      }
+      if(audioData.length > 0)
+      {
+      switch (prediction) {
+        case "BookMark":
+          document.getElementById("BookMark").click()
+          break;
+        case "next":
+          document.getElementById("next").click()
+          break;
+        case "Pause":
+          document.getElementById("Pause").click()
+          break;
+        case "play":
+          document.getElementById("play").click()
+          break;
+        case "prevoius":
+          document.getElementById("prevoius").click()
+          break;
+      default:
+        break;
+    }}
+    }
+    }, [prediction]);
+  const updateData = (id) => {
+    if(data != null)
+    {
+      const filtereddata = data.filter((d) =>  d.AyatFrom === id)
+      setAudioData(filtereddata)
+    }
+    
+  }
 
   useEffect(() => {
     // Function to fetch data from the API
@@ -24,6 +70,11 @@ const SurahDeyails = () => {
     // Call the fetchData function
     fetchData();
   }, []);
+
+  const handleChildState = (dataFromChild) => {
+    setPrediction(dataFromChild);
+  };
+
   if(data == null)
   {
     return (
@@ -39,19 +90,25 @@ const SurahDeyails = () => {
       <Col lg md sm xs xxs={3}>
       </Col>
       <Col lg md sm xs xxs={6}>
-        <h3>Tafheem -ul- Quran</h3>
+        <h3>{router.query.surah}</h3>
       </Col>
       <Col lg md sm xs xxs={3}>
       </Col>
     </Row>
     <Row>
       <ListGroup className="list-group">
-      {data.map((rukuh) => (
-        <Button key= {rukuh.Id} variant="outline-secondary">
+      {data.map((rukuh, index) => (
+          <Button  id= {index + 1} key= {rukuh.Id} variant="outline-secondary" onClick={() => updateData(rukuh.AyatFrom)}>
           <ListGroup.Item >
           <Row>
-          <Col>
-            <span>{rukuh.ArabicText}</span>
+          <Col lg md sm xs xxs={3}>
+          </Col>
+          <Col lg md sm xs xxs={6}>
+          <span>{rukuh.ArabicText}</span><br/>
+            <b><span>Ayah {rukuh.AyatFrom}-{rukuh.AyatTo}</span></b>
+          </Col>
+          <Col lg md sm xs xxs={3}>
+          {index + 1}
           </Col>
           </Row>   
           </ListGroup.Item>
@@ -61,7 +118,10 @@ const SurahDeyails = () => {
       
     </Row>
     <Row className="bayan_screen">
-        <Player_Tafheem_Bayan audioList = {data} tafheem={true}/>
+        <Player_Tafheem_Bayan audioList = {audioData} tafheem={true} Display= {true}/>
+    </Row>
+    <Row>
+    <PredictPage sendDataToParent={handleChildState} state_up = {true}/>
     </Row>
     </>
     

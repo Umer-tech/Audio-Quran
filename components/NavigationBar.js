@@ -13,7 +13,7 @@ const NavigationBar = () => {
         <Container className="container" fluid="md">
         <Row>
           <Navbar className="navbar" expand="lg" fixed>
-            <Navbar.Brand href="#home"> Audio Quran</Navbar.Brand>
+            <Navbar.Brand href="/"> Audio Quran</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="ba sic-navbar-nav">
               <Nav className="me-auto">

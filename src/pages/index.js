@@ -40,7 +40,7 @@ const index = () => {
         </Row>
         <Row>
           {/* <UserAudioRecorder/> */}
-          <PredictPage/>
+          <PredictPage state_up= {false}/>
           {/* <VoiceRecorder/> */}
         </Row>
       </Container>

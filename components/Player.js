@@ -16,9 +16,10 @@ const Player = ({audioList, Display}) => {
   const [flag, setflag] = useState(false);
   const [showbookmark, setShowBookmark] = useState(false);
   const [flag2, setflag2] = useState(false);
-  const [bookmark, setBookmark] = useState({Title: "", SurahRef: 0, AyatRef: 0, RepeatCount: 0, EndAyatRef: 0, Rtype: 1, ReciterId: 0});
+  const [bookmark, setBookmark] = useState({Title: "", SurahRef: 0, AyatRef: 0, RepeatCount: 0, EndAyatRef: 0, RType: 1, ReciterId: 0});
   const audioRef = useRef(null);
   const audioSrcList = [];
+  const type_of_bookmark = 1;
   audioList.map((audio, index) => (
     audioSrcList[index] =  "assets/" + audio.ReciterRef + "/" + audio.AudioFile
   )) 
@@ -128,7 +129,6 @@ const onAudioCanPlay = () => {
   }
   }
   const handleBookmarkShow = () => {
-    console.log(bookmark);
     if(flag2) {
       setBookmark(prevstate => ({
         ...prevstate,
@@ -145,7 +145,7 @@ const onAudioCanPlay = () => {
 
   function handelChange(e)  {
       e.preventDefault();
-    setBookmark({...bookmark, [e.target.name]: e.target.value, ReciterId: audioList[currentAudioIndex].ReciterRef,SurahRef: audioList[currentAudioIndex].SurahRef, Rtype: 1})
+    setBookmark({...bookmark, [e.target.name]: e.target.value, ReciterId: audioList[currentAudioIndex].ReciterRef,SurahRef: audioList[currentAudioIndex].SurahRef})
   }
 
   return (
@@ -173,28 +173,28 @@ const onAudioCanPlay = () => {
       <Row className= {styles.player_controls}>
       <Col  md sm xs= {3}></Col>
         <Col  md sm xs= {6}className="d-flex align-items-center justify-content-center">
-        <img src = "Images/backward.png"  className = {styles.player_controlss} alt = "Backward"  onClick={handlePrevious} />
+        <img src = "Images/backward.png"  id = "prevoius" className = {styles.player_controlss} alt = "Backward"  onClick={handlePrevious} />
             
             {isPlaying ? (
-              <img src = "Images/pause-button-hi.png"  className = {styles.player_controlss} alt = "Pause"  onClick={pauseAudio} />
+              <img src = "Images/pause-button-hi.png" id= "Pause" className = {styles.player_controlss} alt = "Pause"  onClick={pauseAudio} />
     
             ) : (
-              <img src = "Images/playbutton.png"  className = {styles.player_controlss} alt = "Play"  onClick={playAudio} /> 
+              <img src = "Images/playbutton.png" id= "play" className = {styles.player_controlss} alt = "Play"  onClick={playAudio} /> 
             )}
-            <img src = "Images/farward.png"  className = {styles.player_controlss} alt = "Next"  onClick={handleNext} />
+            <img src = "Images/farward.png"  id = "next" className = {styles.player_controlss} alt = "Next"  onClick={handleNext} />
         </Col>
         <Col  md sm xs= {3}></Col>
         </Row>
         <Row>
         <Col md sm xs = {6} >
         {Display ? (
-        <img className = {styles.img} src = {Img} alt = "Repeat" onClick={changeImg}/>
+        <img id = "repeat" className = {styles.img} src = {Img} alt = "Repeat" onClick={changeImg}/>
             ) : ("")}
         </Col>
 
         <Col md sm xs = {6} >
         {Display ? (
-          <img className = {styles.img2} src = "Images/bookmark.png" alt = "Bookmark" onClick={handleBookmarkShow}/>
+          <img id= "BookMark" className = {styles.img2} src = "Images/bookmark.png" alt = "Bookmark" onClick={handleBookmarkShow}/>
           ): ("")}
         </Col>
         </Row>

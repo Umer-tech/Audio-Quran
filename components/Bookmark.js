@@ -6,37 +6,48 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Container, ListGroup, Row, Col } from "react-bootstrap";
 import Router, { useRouter } from 'next/router';
+import Player_Tafheem_Bayan from "./Player_Tafheem_Bayan";
 
 const Bookmark = (props) => {
   const router = useRouter();
   const [ayataudiolist, setAyataudiolist] = useState([]);
   const [showbookmark, setShowBookmark] = useState(false);
+  const [tilawat, setTilawat] = useState(false);
   const [bookmark, setBookmark] = useState({BookmarkId: 0, Title: "", SurahRef: 0, AyatRef: 0, RepeatCount: 0, EndAyatRef: 0, Rtype: 0, ReciterId: 0});
 
   const  getBookmarkAudio =async (bookmark) => {
     let dataa = [];
     let data2 = [];
-    if(bookmark.Rtype === 1)
+    if(bookmark.RType === 1)
     {
+    setTilawat(true)
     const id = bookmark.SurahRef + "-" + bookmark.ReciterId;
     await fetch(`/api/surah_audio/${id}`).then((res) => res.json()).then((data)=> dataa = data);
-    }
-    else if(bookmark.Rtype === 3){
-      const id = bookmark.SurahRef;
-    await fetch(`/api/tafheem/${id}`).then((res) => res.json()).then((data)=> dataa = data);
-    }
-    //Uncomment after witing API for Bayan ul Quran
-    
-    // else if(bookmark.Rtype === 3){
-    //   const id = bookmark.SurahRef + "-" + bookmark.ReciterId;
-    // await fetch(`/api/surah_audio/${id}`).then((res) => res.json()).then((data)=> dataa = data);
-    // }
     data2 = dataa.filter((data) => {
       if (data.AyatId >= bookmark.AyatRef && data.AyatId <= bookmark.EndAyatRef)
           return data;
       })
 
     setAyataudiolist(data2);
+    }
+    else if(bookmark.RType === 2){
+      setTilawat(false)
+    const id = bookmark.SurahRef;
+  await fetch(`/api/bayan_audio/${id}`).then((res) => res.json()).then((data)=> dataa = data);
+
+  setAyataudiolist(dataa)
+
+  }
+    else if(bookmark.RType === 3){
+      setTilawat(false)
+      const id = bookmark.SurahRef;
+    await fetch(`/api/tafheem/${id}`).then((res) => res.json()).then((data)=> dataa = data);
+    setAyataudiolist(dataa)
+
+    }
+    
+    
+    
     }
     const handleBookmarkClose = () => 
   {
@@ -112,7 +123,7 @@ const Bookmark = (props) => {
           <h1 className="heading">Bookmarks</h1>
         </Col>
         <Col lg md sm xs xxs={2}>
-          <img  className = "chain_logo" src="Images/chain0.png" alt = "ChainLogo" onClick={() => alert("Code for creating chain")}/>
+          {/* <img  className = "chain_logo" src="Images/chain0.png" alt = "ChainLogo" onClick={() => alert("Code for creating chain")}/> */}
         </Col>
       </Row>
       <Row>
@@ -141,8 +152,9 @@ const Bookmark = (props) => {
         
       </Row>
       <Row>
-        {showbookmark ? ("") : ( 
-        <Player audioList = {ayataudiolist} Display= {false}/>
+        {tilawat ? (<Player audioList = {ayataudiolist} Display= {false}/>) : ( 
+          <Player_Tafheem_Bayan audioList = {ayataudiolist} tafheem={true} Display= {false}/>
+
         )}
       </Row>
       </>
